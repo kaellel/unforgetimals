@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Unforgetimals</title>
+		<!--Import Google Icon Font-->
+		<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+		<!--Import materialize.css-->
+		<link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+
+		<!--Let browser know website is optimized for mobile-->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </head>
+    <body style="background-image:url(img/stripes.gif); background-repeat:repeat;" onload="localStorage.setItem('com.kaellel.unforgetimals.isQuest', 'false'); ">
+        <!--Import jQuery before materialize.js-->
+		<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+		<script type="text/javascript" src="js/materialize.min.js"></script>
+		
+		
+		
+		<div class="row" style="width:90%; margin:auto">
+			<!-- Unforgetimals Status Card -->
+			<div class="col s12 m7" style="width:100%; margin:auto">
+				<div class="card">
+					<div class="card-stacked">
+						<div class="card-image">
+							<img src="img/5.jpg" style="height:90px; object-fit: cover;">
+							<span class="card-title">Unforgetimals Status</span>
+						</div>
+						<div class="card-content">
+							<span class="card-title">About Unforgetimals</span>
+							<p> Unforgetimals is an interactive activity tracker for the elderly with dementia. One of the problems faced by the elderly, especially the widowed with dementia, is the heartbreaking crush of losing loved ones they have cared for their whole life. Unforgetimals seeks to introduce support and care into life, while delivering medical statistics and reducing the pace of dementia. Unforgetimals periodically initiates logical quests; research shows logic games may slow the progression of dementia. </p>
+							<br />
+							<p> Unforgetimals is designed to run on an Android phone attached to a life size pet analog, such as a plush cat.  </p>
+							<br />
+							<span class="card-title">Unforgetimals Status</span>
+							<div id="statusIndicator">
+								<p> Unforgetimals activity trackers and quest starters are running. </p>
+							</div>
+						</div>
+						<div class="card-action" id="OnOffButton" onclick="toggleOnOff(); ">
+							<a>Turn Off</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- Activity Report Card -->
+			<div class="col s12 m7" style="width:100%; margin:auto">
+				<div class="card">
+					<div class="card-stacked">
+						<div class="card-image">
+							<img src="img/39.jpg" style="height:90px; object-fit: cover;">
+							<span class="card-title">Activity Report</span>
+						</div>
+						<div class="card-content">
+							<p> Below is the activity report: </p>
+							<br />
+							<div id="activityReport">
+							
+							</div>
+						</div>
+						<div class="card-action">
+							<a id="emailBtn">Send Report... </a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- NFC Pairings Card -->
+			<div class="col s12 m7" style="width:100%; margin:auto">
+				<div class="card">
+					<div class="card-stacked">
+						<div class="card-image">
+							<img src="img/30.jpg" style="height:90px; object-fit: cover;">
+							<span class="card-title">NFC Pairings</span>
+						</div>
+						<div class="card-content">
+							<p> Unforgetimals recognizes certain NFC tagged objects as care items, food items, and toy items that the animal interacts with. Modify text fields below to reflect contents of NFC tags associated with the corresponding objects.  </p>
+							<br />
+							<div class="row">
+								<div class="input-field col s6">
+									<input placeholder="Not set" id="care_object_1" type="text" class="validate">
+									<label for="care_object_1">Care Object 1</label>
+								</div>
+							</div>
+							<div class="row">
+								<div class="input-field col s6">
+									<input placeholder="Not set" id="care_object_2" type="text" class="validate">
+									<label for="care_object_2">Care Object 2</label>
+								</div>
+							</div>
+							<div class="row">
+								<div class="input-field col s6">
+									<input placeholder="Not set" id="food_object_1" type="text" class="validate">
+									<label for="food_object_1">Food Object 1</label>
+								</div>
+							</div>
+							<div class="row">
+								<div class="input-field col s6">
+									<input placeholder="Not set" id="food_object_2" type="text" class="validate">
+									<label for="food_object_2">Food Object 2</label>
+								</div>
+							</div>
+							<div class="row">
+								<div class="input-field col s6">
+									<input placeholder="Not set" id="toy_object_1" type="text" class="validate">
+									<label for="toy_object_1">Toy Object 1</label>
+								</div>
+							</div>
+						</div>
+						<div class="card-action">
+							<a onclick="saveNFCPairings(); ">Save Changes </a>
+						</div>
+						<div class="card-action">
+							<a onclick="location='nfc_reader.html'; ">NFC Reader...</a>
+						</div>
+						<div class="card-action">
+							<a onclick="location='nfc_writer.html'; ">NFC Writer...</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- Demo Mode Card -->
+			<div class="col s12 m7" style="width:100%; margin:auto">
+				<div class="card">
+					<div class="card-stacked">
+						<div class="card-image">
+							<img src="img/38.jpg" style="height:90px; object-fit: cover;">
+							<span class="card-title">Demo Mode Settings</span>
+						</div>
+						<div class="card-content">
+							<p> Configure demo mode.  </p>							
+						</div>
+						<div class="card-action">
+							<a onclick="questTrigger(0)">Start Quest 0</a>
+						</div>
+						<div class="card-action">
+							<a onclick="questTrigger(1)">Start Quest 1</a>
+						</div>
+						<div class="card-action">
+							<a onclick="questTrigger(2)">Start Quest 2</a>
+						</div>
+						<div class="card-action">
+							<a onclick="questTrigger(3)">Start Quest 3</a>
+						</div>
+						<div class="card-action">
+							<a onclick="questTrigger(4)">Start Quest 4</a>
+						</div>
+						<div class="card-action">
+							<a onclick="questTrigger(5)">Start Quest 5</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div> 
+		
+		<!-- Script to periodically refresh activity report -->
+		<script src="js/activityreport.js"></script>
+		
+		<!-- Script for the NFC Pairings and Initialization -->
+		<script>
+			localStorage.setItem("com.kaellel.unforgetimals.onoff", "on"); 
+			
+			function saveNFCPairings() {
+				var care_object_1 = document.getElementById("care_object_1"); 
+				var care_object_2 = document.getElementById("care_object_2"); 
+				var food_object_1 = document.getElementById("food_object_1"); 
+				var food_object_2 = document.getElementById("food_object_2"); 
+				var toy_object_1 = document.getElementById("toy_object_1"); 
+				localStorage.setItem("com.kaellel.unforgetimals.careobject1", care_object_1.value); 
+				localStorage.setItem("com.kaellel.unforgetimals.careobject2", care_object_2.value); 
+				localStorage.setItem("com.kaellel.unforgetimals.foodobject1", food_object_1.value); 
+				localStorage.setItem("com.kaellel.unforgetimals.foodobject2", food_object_2.value); 
+				localStorage.setItem("com.kaellel.unforgetimals.toyobject1", toy_object_1.value); 
+				Materialize.toast('Changes Saved. ', 4000); 
+			}
+			
+			function toggleOnOff(){ 
+				if (localStorage.getItem("com.kaellel.unforgetimals.onoff") == "on") {
+					var btn = document.getElementById("OnOffButton"); 
+					btn.innerHTML = "<a> TURN ON </a>"; 
+					localStorage.setItem("com.kaellel.unforgetimals.onoff", "off"); 
+					var ctx = document.getElementById("statusIndicator"); 
+					ctx.innerHTML = "<p> Unforgetimals activity trackers and quest starters are NOT running. </p>"; 
+					Materialize.toast('Turned off unforgetimals activity. ', 4000); 
+				} else {
+					var btn = document.getElementById("OnOffButton"); 
+					btn.innerHTML = "<a> TURN OFF </a>"; 
+					localStorage.setItem("com.kaellel.unforgetimals.onoff", "on"); 
+					var ctx = document.getElementById("statusIndicator"); 
+					ctx.innerHTML = "<p> Unforgetimals activity trackers and quest starters are running. </p>"; 
+					Materialize.toast('Turned on unforgetimals activity. ', 4000); 
+				}
+			}
+			
+			// Load saved pairings
+			var care_object_1 = document.getElementById("care_object_1"); 
+			var care_object_2 = document.getElementById("care_object_2"); 
+			var food_object_1 = document.getElementById("food_object_1"); 
+			var food_object_2 = document.getElementById("food_object_2"); 
+			var toy_object_1 = document.getElementById("toy_object_1"); 
+			care_object_1.value = localStorage.getItem("com.kaellel.unforgetimals.careobject1");
+			care_object_2.value = localStorage.getItem("com.kaellel.unforgetimals.careobject2"); 
+			food_object_1.value = localStorage.getItem("com.kaellel.unforgetimals.foodobject1"); 	
+			food_object_2.value = localStorage.getItem("com.kaellel.unforgetimals.foodobject2"); 	
+			toy_object_1.value = localStorage.getItem("com.kaellel.unforgetimals.toyobject1"); 
+			
+			// Fill activityReport
+			var aR = document.getElementById("activityReport"); 
+			aR.innerHTML = generateActivityGraph(); 
+			startActivityGraphScript(); 
+		</script>
+		
+		<script type="text/javascript" src="js/activitytrigger.js"></script>
+	</body>
+</html>
